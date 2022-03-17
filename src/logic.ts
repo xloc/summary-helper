@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-interface UnitInfo {
+export interface UnitInfo {
   serialNumber: string;
   careTicketNumber: string;
   country?: string;
@@ -8,7 +8,7 @@ interface UnitInfo {
   company?: string;
 }
 
-interface Model {
+export interface Model {
   name: string;
   units: UnitInfo[];
 }
@@ -60,7 +60,6 @@ export const parseText = function (text: string): SummaryInfo {
   const modelNameRegex = /^(\s*[A-Z]{3}\s*)$/m;
 
   let splitedModelTexts = text.split(modelNameRegex);
-  console.log(splitedModelTexts);
 
   for (let i = 0; i < splitedModelTexts.length; i++) {
     let modelName = splitedModelTexts[i];

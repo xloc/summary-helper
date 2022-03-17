@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { parseText, SummaryInfo } from './logic';
 import TableTab from './TableTab';
 import TextTab from './TextTab';
+import update from 'immutability-helper';
+
 
 enum Tab {
   text = "text",
@@ -31,13 +33,17 @@ function App() {
   const [summaryInfo, setSummaryInfo] = useState<SummaryInfo>();
   const onTextChange = (text: string) => {
     let parseResult = parseText(text);
-    console.log(parseResult.models[0]);
 
     if (parseResult) {
       setSummaryInfo(parseResult);
     }
   };
-  const onTableChange = (i_model: number, i_product: number, attribute: string, value: string) => { };
+  const onTableChange = (i_model: number, i_unit: number, attribute: string, value: string) => {
+    if (!summaryInfo) return;
+    setSummaryInfo(update(summaryInfo, {
+      models: { [i_model]: { units: { [i_unit]: { [attribute]: { $set: value } } } } }
+    }));
+  };
 
   return (
     <div className='h-screen'>
