@@ -2,12 +2,14 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { parseText, SummaryInfo } from './logic';
 import TableTab from './TableTab';
-import TextTab from './TextTab';
+import InputTab from './InputTab';
 import update from 'immutability-helper';
+import OutputTab from './OutputTab';
 
 
 enum Tab {
-  text = "text",
+  input = 'input',
+  output = 'output',
   table = "table",
 }
 
@@ -49,19 +51,18 @@ function App() {
     <div className='h-screen'>
       <div className="flex flex-col p-2 h-full">
         <ul className='flex text-lg w-full h-30 space-x-2 mb-2 select-none'>
-          {makeTabItem(Tab.text, "Text")}
+          {makeTabItem(Tab.input, "Input")}
           {makeTabItem(Tab.table, "Table")}
+          {makeTabItem(Tab.output, "Output")}
         </ul>
-        {/* <div className="flex-1">
-          {currentTab === Tab.text ?
-            <TextTab /> :
+        <div className="flex-1">
+          {currentTab === Tab.input ?
+            <InputTab data={summaryInfo} onChange={onTextChange} /> :
             currentTab === Tab.table ?
-              <TableTab /> :
-              "not a valid tab"}
-        </div> */}
-        <div className="flex h-full">
-          <div className="flex-1"><TextTab data={summaryInfo} onChange={onTextChange} /></div>
-          <div className="flex-1"><TableTab data={summaryInfo} onChange={onTableChange} /></div>
+              <TableTab data={summaryInfo} onChange={onTableChange} /> :
+              currentTab === Tab.output ?
+                <OutputTab data={summaryInfo} /> :
+                "not a valid tab"}
         </div>
 
       </div>

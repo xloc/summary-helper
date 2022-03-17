@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { SummaryInfo } from './logic';
 
-interface TextTabProps {
+interface InputTabProps {
     onChange: (text: string) => void;
     data?: SummaryInfo;
 }
-export default function TextTab(props: TextTabProps) {
+export default function InputTab(props: InputTabProps) {
     const inputRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         if (!inputRef.current) return;
