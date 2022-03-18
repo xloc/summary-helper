@@ -38,6 +38,12 @@ interface TableTabProps {
 export default function TableTab({ data, onChange }: TableTabProps) {
   if (!data) return (<div>Invalid Data</div>);
 
+  const onCountryChange = (
+    i_model: number, i_product: number, attribute: string, value: string
+  ) => {
+    onChange(i_model, i_product, attribute, value.trim().replaceAll(' ', '_'));
+  };
+
   return (
     <div className="h-full w-full">
       <h1 className='font-mono text-sm font-bold py-3'>Year: {data.year}  Week: {data.week}</h1>
@@ -57,7 +63,7 @@ export default function TableTab({ data, onChange }: TableTabProps) {
               <tr key={`${i_model} ${i_unit}`} className="hover:bg-slate-200">
                 <td className='select-all w-[12em]'>{unit.serialNumber}</td>
                 <td className='select-all w-[6em]'>{unit.careTicketNumber}</td>
-                <TDEdit className='select-all w-[12em] pr-2' {...{ i_model, i_unit, attribute: 'country', onChange, text: unit.country }} />
+                <TDEdit className='select-all w-[12em] pr-2' {...{ i_model, i_unit, attribute: 'country', onChange: onCountryChange, text: unit.country }} />
                 <TDEdit className='w-[35em] pr-2' {...{ i_model, i_unit, attribute: 'summary', onChange, text: unit.summary }} />
                 <td>{unit.company}</td>
               </tr>

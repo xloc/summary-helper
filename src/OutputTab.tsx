@@ -20,7 +20,7 @@ export default function OutputTab({ data }: OutputTabProps) {
 
   return (
     <pre>
-      Y{format(year % 100)}Wk{format(week)} - {nUnit} units<br />
+      Y{format(year % 100)}WK{format(week)} - {nUnit} units<br />
 
       {models.map(model => {
         return '\n' + model.name + '\n' + model.units
