@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import { DateTime, Duration } from 'luxon';
 
 export interface UnitInfo {
   serialNumber: string;
@@ -42,7 +42,10 @@ function parseCaseLine(line: string): UnitInfo | undefined {
 }
 
 export const parseText = function (text: string): SummaryInfo {
-  const date = DateTime.now().setZone('America/Vancouver');
+  var date = DateTime.now()
+    .setZone('America/Vancouver')
+    .minus(Duration.fromObject({ weeks: 1 }));
+
   let year = date.year;
   let week: number = date.weekNumber;
   let models: Model[] = [];
