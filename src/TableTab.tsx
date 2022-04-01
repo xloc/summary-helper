@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { SummaryInfo } from './logic';
 
 
-
 interface EditableTDProps {
   text?: string;
   i_unit: number;

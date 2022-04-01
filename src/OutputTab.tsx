@@ -17,7 +17,6 @@ export default function OutputTab({ data }: OutputTabProps) {
   const maxCountryLength = models.flatMap(model => model.units.map(unit => unit.country?.length ?? 0)).reduce((a, b) => Math.max(a, b));
   console.log({ year, week, nUnit, maxCountryLength });
 
-
   return (
     <pre>
       Y{format(year % 100)}WK{format(week)} - {nUnit} units<br />
