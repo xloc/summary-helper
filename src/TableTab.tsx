@@ -30,6 +30,8 @@ function TDEdit({ className, text, i_unit, i_model, attribute, onChange }: Edita
   );
 }
 
+const MAGIC_STRING = 'aHR0cHM6Ly9mb3J0aWNhcmUuZm9ydGluZXQuY29tL0N1c3RvbWVyU3VwcG9ydC9kZWZhdWx0LmFzcHg/VElEPQ==';
+
 interface TableTabProps {
   onChange: (i_model: number, i_product: number, attribute: string, value: string) => void;
   data?: SummaryInfo;
@@ -41,6 +43,12 @@ export default function TableTab({ data, onChange }: TableTabProps) {
     i_model: number, i_product: number, attribute: string, value: string
   ) => {
     onChange(i_model, i_product, attribute, value.trim().replaceAll(' ', '_'));
+  };
+
+  const openTicket = (tid: string) => {
+    return () => {
+      window.open(`${atob(MAGIC_STRING)}${tid}`);
+    };
   };
 
   return (
@@ -61,7 +69,7 @@ export default function TableTab({ data, onChange }: TableTabProps) {
             return (
               <tr key={`${i_model} ${i_unit}`} className="hover:bg-slate-200">
                 <td className='select-all w-[12em]'>{unit.serialNumber}</td>
-                <td className='select-all w-[6em]'>{unit.careTicketNumber}</td>
+                <td className='select-all w-[6em]' onClick={openTicket(unit.careTicketNumber)}>{unit.careTicketNumber}</td>
                 <TDEdit className='select-all w-[12em] pr-2' {...{ i_model, i_unit, attribute: 'country', onChange: onCountryChange, text: unit.country }} />
                 <TDEdit className='w-[35em] pr-2' {...{ i_model, i_unit, attribute: 'summary', onChange, text: unit.summary }} />
                 <td>{unit.company}</td>
