@@ -26,7 +26,7 @@ export default function OutputTab({ data }: OutputTabProps) {
           .map((unit, i_unit) => (
             `${format(i_unit + 1)}. ${unit.serialNumber} ${unit.careTicketNumber} ${unit.country} ${'-'.repeat(maxCountryLength + 1 - (unit.country?.length ?? 0))} ${unit.summary}\n`
           ))
-          .reduce((a, b) => (a + b));
+          .reduce((a, b) => (a + b), "");
       })}
     </pre>
   );
